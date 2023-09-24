@@ -124,15 +124,18 @@ const approveTransaction = async (req, res) => {
         const x = buyer.amountOfTokenBuy;
         console.log(x);
         const amtOfHbarToPay = x * 2;
+        console.log("Hiiiii 127")
         const buyerHbarBalance = parseFloat((await utilsSdk.checkHbarBal(buyerId)));
         // const buyerTokenBalance = parseFloat((await utilsSdk.balanceTokenQuery(buyerId)));
         const sellerHbarBalance = parseFloat((await utilsSdk.checkHbarBal(sellerId)));
         // const sellerTokenBalance = parseFloat((await utilsSdk.balanceTokenQuery(sellerId)));
-
-        // console.log(buyerHbarBalance);
-        // console.log(buyerTokenBalance);
-        // console.log(sellerHbarBalance);
-        // console.log(sellerTokenBalance);
+        console.log("Hiiiii 132")
+        console.log(buyerHbarBalance);
+        console.log("Hiiiii 134")
+       // console.log(buyerTokenBalance);
+        console.log(sellerHbarBalance);
+       // console.log(sellerTokenBalance);
+        console.log("Hiiiii")
 
         if(seller.amountOfTokenSell-x==0||seller.amountOfTokenSell==x){
             const transaction = await utilsSdk.atomicSwapTransaction(sellerId, buyerId, x, amtOfHbarToPay);
@@ -142,7 +145,7 @@ const approveTransaction = async (req, res) => {
                     availableHbar: sellerHbarBalance,
                     isSeller: false
                 })
-             //   console.log(updatedSellerEmitterList);
+                console.log(updatedSellerEmitterList);
                 const deleteSeller = await Seller.findOneAndDelete({ accountId: sellerId });
             const updatedBuyerEmitterList = await Emitter.findOneAndUpdate({ accountId: buyerId, isBuyer: true },
                 {
@@ -153,6 +156,7 @@ const approveTransaction = async (req, res) => {
                 })
 
             const deleteBuyer = await Buyer.findOneAndDelete({ accountId: buyerId });
+            return res.status(200).json({ message: "Atomic swap transaction successfull & updated Seller, buyer,Emitter Schema" });
 
         }
         else{
@@ -164,7 +168,7 @@ const approveTransaction = async (req, res) => {
                     availableHbar: sellerHbarBalance
 
                 })
-              //  console.log(updatedSellerEmitterList);
+               console.log(updatedSellerEmitterList);
                 
 
             const UpdatedSellerList = await Seller.findOneAndUpdate({ accountId: sellerId },
@@ -183,7 +187,7 @@ const approveTransaction = async (req, res) => {
                     isBuyer: false
 
                 })
-            //    console.log(updatedBuyerEmitterList);
+               console.log(updatedBuyerEmitterList);
             const deleteBuyer = await Buyer.findOneAndDelete({ accountId: buyerId });
 
         }

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./back-end/app.js"
+    "start": "nodemon ./back-end/app.js",
+    "createFT": "nodemon ./back-end/hedera-utils/createFT.js"
   },
   "keywords": [],
   "author": "",

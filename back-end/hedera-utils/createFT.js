@@ -5,11 +5,11 @@ const {
     TokenMintTransaction,
     AccountBalanceQuery, PrivateKey, Wallet, TokenSupplyType
 } = require("@hashgraph/sdk");
-require('dotenv').config({path: "../.env"});
+require('dotenv').config();
 // fetch Account1 and set is as treasury account 
 //const utils=require("./utils");
 const treasuryId = process.env.MY_ACCOUNT_ID;
-const treasuryKey =PrivateKey.fromString(process.env.MY_PRIVATE_KEY); 
+const treasuryKey =PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
 
 
 if (treasuryId == null || treasuryKey == null ) {
@@ -29,7 +29,7 @@ const adminUser = new Wallet(
 
 async function createFT() {
     //Create the transaction and freeze for manual signing
-    const transaction = await new TokenCreateTransaction()
+    const transaction = await new TokenCreateTransaction() 
         .setTokenName("Carbon Credit")
         .setTokenSymbol("CC")
         .setTokenType(TokenType.FungibleCommon)
@@ -58,6 +58,7 @@ async function createFT() {
 
 async function main(){
     // call createFT func
+    console.log("Hi")  
     createFT();
 
      

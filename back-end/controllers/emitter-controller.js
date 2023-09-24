@@ -42,7 +42,7 @@ const getAllEmitters = async (req, res) => {
     return res.status(200).json(emitterList);
   } catch (error) {
     console.log(error.message);
-    return res.status(404).json({ message: "Emitters details not found" });
+    return res.status(404).json({ message: "Emitters details not found" }); 
   }
 };
 
@@ -217,9 +217,9 @@ const loginEmitter = async (req, res) => {
 
   // Check for govt or MRV
 
-  const govtAccount = "0.0.3885341";
+  const govtAccount = "0.0.460870";
 
-  const mrvAccount = "0.0.4376836"; // Plz assign mrv account Id
+  const mrvAccount = "0.0.460904"; // Plz assign mrv account Id
 
   if (accountId == govtAccount) {
     return res.status(200).send({ message: "Redirect to govt dashboard" });
@@ -292,7 +292,7 @@ const emitterAcceptPaybackReq = async (req, res) => {
       const mrvUpdate = await MRV.findOneAndUpdate({ accountId: accountId}, { dueDate: null });
       const e = await Emitter.findOneAndUpdate({ accountId: accountId }, { dueDate: null });
 
-      return res.status(200).json({ message: "Payback request accepted successfully" });
+      return res.status(200).json({ message: "Payback request accepted successfully" }); 
     }
   } catch (err) {
     console.log(err);
